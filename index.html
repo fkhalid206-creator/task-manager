@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager Dashboard</title>
+    <!-- Use Inter font for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>TaskDash</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-filter="all">
+                    <span class="nav-icon">📊</span> All Tasks
+                </a>
+                <a href="#" class="nav-item" data-filter="pending">
+                    <span class="nav-icon">⏳</span> Pending Tasks
+                </a>
+                <a href="#" class="nav-item" data-filter="completed">
+                    <span class="nav-icon">✅</span> Completed Tasks
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Task Manager Dashboard</h1>
+                <div class="header-actions">
+                    <button id="export-btn" class="btn-secondary export-btn">
+                        <span class="icon">📥</span> Export to Excel
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">U</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <section class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Tasks</h3>
+                        <p id="total-tasks-count">0</p>
+                    </div>
+                    <div class="stat-icon total-icon">📊</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Pending Tasks</h3>
+                        <p id="pending-tasks-count">0</p>
+                    </div>
+                    <div class="stat-icon pending-icon">⏳</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Completed Tasks</h3>
+                        <p id="completed-tasks-count">0</p>
+                    </div>
+                    <div class="stat-icon completed-icon">✅</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Task Progress</h3>
+                        <p><span id="progress-percentage">0</span>%</p>
+                    </div>
+                    <div class="progress-chart" id="progress-chart">
+                        <div class="inner-circle"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Input Area for New Tasks -->
+            <section class="task-input-section">
+                <form id="task-form" class="task-form">
+                    <input type="text" id="task-input" placeholder="What needs to be done?" required autocomplete="off">
+                    <button type="submit" class="btn-primary">Add Task</button>
+                </form>
+            </section>
+
+            <!-- Task List Display Area -->
+            <section class="task-list-section">
+                <div class="list-header">
+                    <h2 id="current-view-title">All Tasks</h2>
+                </div>
+                <div class="task-list-container">
+                    <table class="task-table" id="task-table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Task Name</th>
+                                <th>Date Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-list-body">
+                            <!-- Tasks will be dynamically injected here via JS -->
+                        </tbody>
+                    </table>
+
+                    <!-- Empty State for when no tasks exist -->
+                    <div id="empty-state" class="empty-state hidden">
+                        <div class="empty-icon">📝</div>
+                        <p>No tasks found in this view. Add a task to get started!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Task Modal overlay -->
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Edit Task</h3>
+            <form id="edit-task-form">
+                <input type="hidden" id="edit-task-id">
+                <input type="text" id="edit-task-input" required autocomplete="off">
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancel-edit-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script src="app.js"></script>
+</body>
+
+</html>
